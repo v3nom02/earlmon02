@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Universe</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        nav img {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        #introVideo {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        #introVideo video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        #introVideo h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        #characterList {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 80px 10px;
+        }
+
+        .character {
+            border: 1px solid #ccc;
+            margin: 10px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .character:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .character img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .character:hover img {
+            transform: scale(1.1);
+        }
+
+        .character .name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .character .details {
+            font-size: 14px;
+            margin-top: 5px;
+            color: #ddd;
+        }
+
+        #about {
+            text-align: center;
+            margin: 50px;
+        }
+
+        #about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        #about p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <img src="dragonball.jpg" alt="Dragon Ball Logo">
+    <div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#characters">Characters</a>
+    </div>
+</nav>
+
+<section id="introVideo">
+    <video autoplay loop muted>
+        <source src="vegeta.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <h1>Dragon Ball Universe</h1>
+</section>
+
+<section id="about">
+    <h2>About Dragon Ball</h2>
+    <p>Dragon Ball is a Japanese media franchise created by Akira Toriyama. It tells the story of Son Goku, a martial artist who embarks on a quest to find the seven Dragon Balls, which summon a dragon capable of granting wishes.</p>
+</section>
+
+<section id="characters">
+    <h2>Dragon Ball Characters</h2>
+    <div id="characterList"></div>
+</section>
+
+<script>
+    const characters = [
+        {
+            name: 'Goku',
+            race: 'Saiyan',
+            baseKi: '1000000000',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Z Fighter',
+            imageUrl: 'goku.webp',
+            videoUrl: 'https://www.example.com/path-to-video/goku.mp4'
+        },
+        {
+            name: 'Piccolo',
+            race: 'Namekian',
+            baseKi: '250000000',
+            totalKi: '500000000',
+            gender: 'Male',
+            affiliation: 'Z Fighter',
+            imageUrl: 'picolo.webp',
+            videoUrl: 'https://www.example.com/path-to-video/piccolo.mp4'
+        },
+        {
+            name: 'Vegeta',
+            race: 'Saiyan',
+            baseKi: '300000000',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Z Fighter',
+            imageUrl: 'vegeta.webp',
+            videoUrl: 'https://www.example.com/path-to-video/vegeta.mp4'
+        },
+        {
+            name: 'Gohan',
+            race: 'Half-Saiyan',
+            baseKi: '250000000',
+            totalKi: '400000000',
+            gender: 'Male',
+            affiliation: 'Z Fighter',
+            imageUrl: 'gohan.webp',
+            videoUrl: 'https://www.example.com/path-to-video/gohan.mp4'
+        },
+        {
+            name: 'Bardock',
+            race: 'Saiyan',
+            baseKi: '200000000',
+            totalKi: '350000000',
+            gender: 'Male',
+            affiliation: 'Rebel',
+            imageUrl: 'bardock.webp',
+            videoUrl: 'https://www.example.com/path-to-video/bardock.mp4'
+        },
+        {
+            name: 'Android 17',
+            race: 'Android',
+            baseKi: '220000000',
+            totalKi: '300000000',
+            gender: 'Male',
+            affiliation: 'Z Fighter',
+            imageUrl: '17.webp',
+            videoUrl: 'https://www.example.com/path-to-video/android17.mp4'
+        },
+        {
+            name: 'Trunks',
+            race: 'Half-Saiyan',
+            baseKi: '180000000',
+            totalKi: '330000000',
+            gender: 'Male',
+            affiliation: 'Z Fighter',
+            imageUrl: 'trunks.webp',
+            videoUrl: 'https://www.example.com/path-to-video/trunks.mp4'
+        },
+        {
+            name: 'Frieza',
+            race: 'Frieza Race',
+            baseKi: '700000000',
+            totalKi: '1000000000',
+            gender: 'Male',
+            affiliation: 'Villain',
+            imageUrl: 'freezer.webp',
+            videoUrl: 'https://www.example.com/path-to-video/frieza.mp4'
+        },
+        {
+            name: 'Cell',
+            race: 'Bio-Android',
+            baseKi: '500000000',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Villain',
+            imageUrl: 'cell.webp',
+            videoUrl: 'https://www.example.com/path-to-video/cell.mp4'
+        },
+        {
+            name: 'Majin Buu',
+            race: 'Majin',
+            baseKi: '1000000000',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Villain',
+            imageUrl: 'buu.webp',
+            videoUrl: 'https://www.example.com/path-to-video/majinbuu.mp4'
+        },
+        {
+            name: 'Krillin',
+            race: 'Human',
+            baseKi: '20000000',
+            totalKi: '50000000',
+            gender: 'Male',
+            affiliation: 'Z Fighter',
+            imageUrl: 'krilin.webp',
+            videoUrl: 'https://www.example.com/path-to-video/krillin.mp4'
+        },
+        // New characters added below
+        {
+            name: 'Android 18',
+            race: 'Android',
+            baseKi: '300000000',
+            totalKi: '400000000',
+            gender: 'Female',
+            affiliation: 'Z Fighter',
+            imageUrl: 'android 18.webp',
+            videoUrl: 'https://www.example.com/path-to-video/android18.mp4'
+        },
+        {
+            name: 'Beerus',
+            race: 'God of Destruction',
+            baseKi: 'Infinity',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'God of Destruction',
+            imageUrl: 'beerus.webp',
+            videoUrl: 'https://www.example.com/path-to-video/beerus.mp4'
+        },
+        {
+            name: 'Broly',
+            race: 'Saiyan',
+            baseKi: '1000000000',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Villain',
+            imageUrl: 'broly.webp',
+            videoUrl: 'https://www.example.com/path-to-video/broly.mp4'
+        },
+        {
+            name: 'Whis',
+            race: 'Angel',
+            baseKi: 'Infinity',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Angel',
+            imageUrl: 'whis.webp',
+            videoUrl: 'https://www.example.com/path-to-video/whis.mp4'
+        },
+        {
+            name: 'Zeno',
+            race: 'Zeno',
+            baseKi: 'Infinity',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Zeno',
+            imageUrl: 'zeno.webp',
+            videoUrl: 'https://www.example.com/path-to-video/zeno.mp4'
+        },
+        {
+            name: 'Jiren',
+            race: 'Alien',
+            baseKi: '500000000',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Warrior of Universe 11',
+            imageUrl: 'jiren.webp',
+            videoUrl: 'https://www.example.com/path-to-video/jiren.mp4'
+        },
+        {
+            name: 'Toppo',
+            race: 'Human',
+            baseKi: '300000000',
+            totalKi: '400000000',
+            gender: 'Male',
+            affiliation: 'Warrior of Universe 11',
+            imageUrl: 'toppo.webp',
+            videoUrl: 'https://www.example.com/path-to-video/toppo.mp4'
+        },
+        {
+            name: 'Dyspo',
+            race: 'Alien',
+            baseKi: '200000000',
+            totalKi: '300000000',
+            gender: 'Male',
+            affiliation: 'Warrior of Universe 11',
+            imageUrl: 'dyspo.webp',
+            videoUrl: 'https://www.example.com/path-to-video/dyspo.mp4'
+        },
+        {
+            name: 'Grand Priest',
+            race: 'Angel',
+            baseKi: 'Infinity',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Angel',
+            imageUrl: 'grand priest.webp',
+            videoUrl: 'https://www.example.com/path-to-video/grandpriest.mp4'
+        },
+        {
+            name: 'Gogeta',
+            race: 'Saiyan',
+            baseKi: 'Infinity',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Fusion Warrior',
+            imageUrl: 'gogeta.webp',
+            videoUrl: 'https://www.example.com/path-to-video/gogeta.mp4'
+        },
+        {
+            name: 'Vegito',
+            race: 'Saiyan',
+            baseKi: 'Infinity',
+            totalKi: 'Infinity',
+            gender: 'Male',
+            affiliation: 'Fusion Warrior',
+            imageUrl: 'vegito.webp',
+            videoUrl: 'https://www.example.com/path-to-video/vegito.mp4'
+        },
+        {
+            name: 'Android 16',
+            race: 'Android',
+            baseKi: '150000000',
+            totalKi: '250000000',
+            gender: 'Male',
+            affiliation: 'Z Fighter',
+            imageUrl: 'android 16.webp',
+            videoUrl: 'https://www.example.com/path-to-video/android16.mp4'
+        },
+        {
+            name: 'Tien Shinhan',
+            race: 'Human',
+            baseKi: '180000000',
+            totalKi: '250000000',
+            gender: 'Male',
+            affiliation: 'Z Fighter',
+            imageUrl: 'tenshinhan.webp',
+            videoUrl: 'https://www.example.com/path-to-video/tien.mp4'
+        },
+        {
+            name: 'Raditz',
+            race: 'Saiyan',
+            baseKi: '200000000',
+            totalKi: '300000000',
+            gender: 'Male',
+            affiliation: 'Villain',
+            imageUrl: 'raditz.webp',
+            videoUrl: 'https://www.example.com/path-to-video/raditz.mp4'
+        },
+    ];
+
+    const characterList = document.getElementById('characterList');
+
+    characters.forEach(character => {
+        const characterDiv = document.createElement('div');
+        characterDiv.classList.add('character');
+        
+        const characterImage = document.createElement('img');
+        characterImage.src = character.imageUrl;
+        characterImage.alt = character.name;
+
+        const characterName = document.createElement('div');
+        characterName.classList.add('name');
+        characterName.textContent = character.name;
+
+        const characterDetails = document.createElement('div');
+        characterDetails.classList.add('details');
+        characterDetails.textContent = `Race: ${character.race}`;
+
+        characterDiv.appendChild(characterImage);
+        characterDiv.appendChild(characterName);
+        characterDiv.appendChild(characterDetails);
+        characterList.appendChild(characterDiv);
+    });
+</script>
+
+</body>
+</html>
